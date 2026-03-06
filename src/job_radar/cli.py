@@ -35,8 +35,8 @@ def check(notify: bool, quiet: bool, dry_run: bool) -> None:
         get_sha, set_sha, is_seen_job, add_seen_job,
         prune_seen_jobs, append_findings, load_unsent, save_unsent,
     )
-    from job_radar.github_api import get_latest_sha, get_diff
-    from job_radar.parser import parse_diff
+    from job_radar.github_api import get_latest_sha, get_diff, get_raw_file
+    from job_radar.parser import parse_diff, parse_raw_file
     from job_radar.filters import filter_jobs
     from job_radar.dedup import dedup_jobs, filter_seen, make_dedup_key
     from job_radar.discord import send_jobs
@@ -85,8 +85,18 @@ def check(notify: bool, quiet: bool, dry_run: bool) -> None:
             old_sha = get_sha(owner_repo, file_path)
 
             if old_sha is None:
+                # First run: fetch full file, parse rows from last 1 day
+                try:
+                    raw_content = get_raw_file(owner_repo, file_path)
+                    raw_jobs = parse_raw_file(raw_content, source_repo=owner_repo, max_age_days=1)
+                    filtered = filter_jobs(raw_jobs, include_kw, exclude_kw)
+                    excluded_count += len(raw_jobs) - len(filtered)
+                    all_new_jobs.extend(filtered)
+                except Exception as exc:
+                    logger.warning("Could not fetch initial file for %s: %s", owner_repo, exc)
                 set_sha(owner_repo, file_path, new_sha)
                 first_run_repos.append(owner_repo)
+                repos_checked += 1
                 progress.advance(task)
                 continue
 
@@ -120,7 +130,7 @@ def check(notify: bool, quiet: bool, dry_run: bool) -> None:
     if first_run_repos and not quiet:
         click.echo(
             f"\nFirst run -- baseline recorded for: {', '.join(first_run_repos)}. "
-            "You'll get notifications starting next run."
+            "Showing jobs from the last 24 hours."
         )
 
     if not all_new_jobs:

@@ -60,6 +60,13 @@ def get_latest_sha(owner_repo: str, file_path: str) -> str:
     return commits[0]["sha"]
 
 
+def get_raw_file(owner_repo: str, file_path: str) -> str:
+    """Return the raw content of a file from a repo's default branch."""
+    url = f"https://raw.githubusercontent.com/{owner_repo}/HEAD/{file_path}"
+    resp = _get_with_retry(url)
+    return resp.text
+
+
 def get_diff(owner_repo: str, old_sha: str, new_sha: str) -> str:
     """Return the unified diff text between two SHAs."""
     url = f"{GITHUB_API}/repos/{owner_repo}/compare/{old_sha}...{new_sha}"
