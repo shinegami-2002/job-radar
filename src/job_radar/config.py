@@ -34,12 +34,12 @@ DEFAULT_CONFIG: dict = {
         "new grad", "new graduate", "entry level", "entry-level",
     ],
     "exclude_keywords": [
-        "phd required", "phd only", "security clearance", "ts/sci",
-        "us citizen only", "us citizens only", "no sponsorship",
-        "not eligible for sponsorship", "does not provide immigration",
-        "unauthorized workers", "must be a u.s. citizen",
-        "clearance required", "staff engineer", "senior staff",
-        "principal", "director", "manager", "lead engineer",
+        "phd required", "phd only",
+        "security clearance", "ts/sci",
+        "us citizen only", "us citizens only",
+        "no sponsorship", "not eligible for sponsorship",
+        "does not provide immigration", "unauthorized workers",
+        "must be a u.s. citizen", "clearance required",
         "7+ years", "10+ years",
     ],
 }
