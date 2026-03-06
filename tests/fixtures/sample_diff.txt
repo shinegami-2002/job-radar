@@ -1,0 +1,11 @@
+diff --git a/README.md b/README.md
+index abc..def 100644
+--- a/README.md
++++ b/README.md
+@@ -10,6 +10,10 @@
+ | Company | Role | Location | Application/Link | Date Added |
+ |---------|------|----------|------------------|------------|
++| Amazon | SWE New Grad 2026 | Seattle, WA | [Apply](https://amazon.jobs/123) | 2026-03-05 |
++| Google | ML Engineer New Grad | Mountain View, CA | [Apply](https://careers.google.com/456) | 2026-03-05 |
++| Meta | Data Engineer | Menlo Park, CA | N/A | 2026-03-05 |
+ | Microsoft | SWE | Redmond, WA | [Apply](https://careers.microsoft.com/789) | 2026-02-01 |
