@@ -17,11 +17,13 @@ def _haystack(job: dict) -> str:
 
 def should_include(job: dict, include_keywords: list[str], exclude_keywords: list[str]) -> bool:
     text = _haystack(job)
+    role = job.get("role", "").lower()
     for kw in exclude_keywords:
         if kw.lower() in text:
             return False
+    # Match include keywords against the role title only
     for kw in include_keywords:
-        if kw.lower() in text:
+        if kw.lower() in role:
             return True
     return False
 

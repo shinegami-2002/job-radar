@@ -1,6 +1,6 @@
 import pytest
 
-INCLUDE_KW = ["software engineer", "ml engineer", "new grad", "entry level", "backend"]
+INCLUDE_KW = ["software engineer", "ml engineer", "new grad", "entry level", "backend engineer", "developer"]
 EXCLUDE_KW = ["phd required", "us citizen only", "no sponsorship", "senior staff", "10+ years"]
 
 
@@ -32,6 +32,18 @@ def test_exclude_in_location_drops_job():
 def test_case_insensitive():
     from job_radar.filters import should_include
     job = {"company": "Acme", "role": "BACKEND ENGINEER", "location": "Remote", "url": "", "source_repo": "x"}
+    assert should_include(job, INCLUDE_KW, EXCLUDE_KW)
+
+
+def test_non_tech_role_with_junior_level_excluded():
+    from job_radar.filters import should_include
+    job = {"company": "Schreiber Foods", "role": "Packaging Operator", "location": "Junior", "url": "", "source_repo": "x"}
+    assert not should_include(job, INCLUDE_KW, EXCLUDE_KW)
+
+
+def test_tech_role_with_junior_level_included():
+    from job_radar.filters import should_include
+    job = {"company": "Google", "role": "Software Engineer, New Grad", "location": "Junior", "url": "", "source_repo": "x"}
     assert should_include(job, INCLUDE_KW, EXCLUDE_KW)
 
 

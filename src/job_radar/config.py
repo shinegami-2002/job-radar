@@ -7,7 +7,7 @@ CONFIG_FILE = CONFIG_DIR / "config.json"
 
 DEFAULT_CONFIG: dict = {
     "repos": [
-        {"owner_repo": "speedyapply/2026-AI-College-Jobs",     "file_path": "NEW_GRAD.md"},
+        {"owner_repo": "speedyapply/2026-AI-College-Jobs",     "file_path": "NEW_GRAD_USA.md"},
         {"owner_repo": "speedyapply/2026-SWE-College-Jobs",    "file_path": "NEW_GRAD_USA.md"},
         {"owner_repo": "SimplifyJobs/New-Grad-Positions",      "file_path": "README.md"},
         {"owner_repo": "vanshb03/New-Grad-2026",               "file_path": "README.md"},
@@ -15,12 +15,23 @@ DEFAULT_CONFIG: dict = {
         {"owner_repo": "skillsire/Daily-H1B-Jobs",             "file_path": "README.md"},
     ],
     "include_keywords": [
-        "software engineer", "swe", "ai engineer", "ml engineer",
-        "machine learning", "data engineer", "full stack", "fullstack",
-        "backend", "cloud engineer", "platform engineer", "genai", "llm",
-        "nlp", "deep learning", "computer vision", "ai/ml", "new grad",
-        "junior", "entry level", "associate", "devops", "dev ops",
-        "solutions engineer",
+        "software engineer", "software developer", "swe", "sde",
+        "ai engineer", "ml engineer", "machine learning", "data engineer",
+        "data scientist", "full stack", "fullstack", "full-stack",
+        "backend engineer", "backend developer", "frontend engineer",
+        "frontend developer", "cloud engineer", "platform engineer",
+        "site reliability", "sre", "infrastructure engineer",
+        "genai", "generative ai", "llm", "nlp", "deep learning",
+        "computer vision", "ai/ml", "ai engineer", "ml ops", "mlops",
+        "devops engineer", "dev ops engineer", "systems engineer",
+        "solutions engineer", "solutions architect",
+        "data analyst", "analytics engineer", "data science",
+        "embedded engineer", "firmware engineer",
+        "security engineer", "cybersecurity engineer",
+        "network engineer", "automation engineer",
+        "python developer", "java developer", "react developer",
+        "developer", "programmer", "coder",
+        "new grad", "new graduate", "entry level", "entry-level",
     ],
     "exclude_keywords": [
         "phd required", "phd only", "security clearance", "ts/sci",
