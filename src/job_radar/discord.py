@@ -36,10 +36,12 @@ def _build_embed(jobs: list[dict], batch: int, total_batches: int, total_count: 
         location = j.get("location") or "Unknown"
         url = j.get("url", "")
         source = j.get("source_repo", "")
+        date_posted = j.get("date_posted", "")
         apply_text = f"[Apply Here]({url})" if url else "No link"
+        date_line = f"\nPosted: {date_posted}" if date_posted else ""
         fields.append({
             "name": f"{j['company']} -- {j['role']}"[:256],
-            "value": f"{location}\n{apply_text}\nSource: {source}"[:1024],
+            "value": f"{location}\n{apply_text}{date_line}\nSource: {source}"[:1024],
             "inline": False,
         })
 

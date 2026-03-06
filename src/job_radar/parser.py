@@ -46,13 +46,17 @@ def parse_diff(diff_text: str, source_repo: str) -> list[dict]:
             url = _extract_url(url_cell)
             if not company or company in ("-", "---"):
                 continue
-            jobs.append({
+            job = {
                 "company": company,
                 "role": role,
                 "location": location,
                 "url": url,
                 "source_repo": source_repo,
-            })
+            }
+            date_match = _DATE_RE.search(line)
+            if date_match:
+                job["date_posted"] = date_match.group(1)
+            jobs.append(job)
         except Exception as exc:
             logger.warning("Could not parse row %r: %s", raw_line, exc)
     return jobs
@@ -101,6 +105,7 @@ def parse_raw_file(content: str, source_repo: str, max_age_days: int = 1) -> lis
                 "location": location,
                 "url": url,
                 "source_repo": source_repo,
+                "date_posted": date_match.group(1),
             })
         except Exception as exc:
             logger.warning("Could not parse row %r: %s", line, exc)
